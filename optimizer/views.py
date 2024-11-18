@@ -30,7 +30,7 @@ def optimize_routes_view(request):
         map_links = [route['map_link'] for route in optimized_routes]
         
         # Return only the map links in the JSON response
-        return JsonResponse({"optimized_routes": map_links})
+        return JsonResponse({"map_links": map_links})
     else:
         # Return an error response if the file is not found
         return JsonResponse({"error": "File not found."}, status=404)

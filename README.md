@@ -75,6 +75,13 @@ The project has two main endpoints:
    - **Description**: This endpoint loads the CSV data and displays it as a table in an HTML template. It’s useful for inspecting the raw data used for optimization.
    - **Template**: `data_source.html`
 
+
+3. **Route Data View**
+   - **URL**: `/route-data-view/`
+   - **Description**: This route provides a view of detailed route data. It may include detailed information such as pickup and dropoff times, locations, distances, travel times, and more.
+   - **Response**: A detailed view of the route data.
+  
+
 ## Route Optimization Overview
 
 The optimization logic is implemented in `optimize_routes.py` and follows these steps:

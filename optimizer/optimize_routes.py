@@ -1,8 +1,9 @@
 import csv
 import os
 import time
-from math import radians, sin, cos, sqrt, atan2
 from datetime import timedelta
+from math import atan2, cos, radians, sin, sqrt
+
 import pandas as pd
 from django.conf import settings
 

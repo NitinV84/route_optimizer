@@ -1,5 +1,7 @@
 from django.urls import path
-from .views import optimize_routes_view, data_source_table_view, route_data_view
+
+from .views import (data_source_table_view, optimize_routes_view,
+                    route_data_view)
 
 urlpatterns = [
     path('optimize-route/', optimize_routes_view, name="optimize_route"),

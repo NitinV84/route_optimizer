@@ -1,11 +1,13 @@
-import os
 import csv
-from django.http import JsonResponse
-from django.shortcuts import render
-from django.http import Http404
-from .optimize_routes import optimize_routes
-from .data_processing import read_csv, process_data
+import os
+
 from django.conf import settings
+from django.http import Http404, JsonResponse
+from django.shortcuts import render
+
+from .data_processing import process_data, read_csv
+from .optimize_routes import optimize_routes
+
 
 # View to optimize routes based on CSV data
 def optimize_routes_view(request):

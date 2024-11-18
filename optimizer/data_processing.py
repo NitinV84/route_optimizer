@@ -1,6 +1,9 @@
 import csv
-from .utils import haversine, estimate_travel_time
+
 from django.conf import settings
+
+from .utils import estimate_travel_time, haversine
+
 
 def read_csv(file_path):
     """

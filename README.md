@@ -69,17 +69,20 @@ The project has two main endpoints:
        ]
      }
      ```
+     ![Project Logo](images/screenshot_1.png)
 
 2. **Data Source Table Endpoint**
    - **URL**: `/data-source/`
    - **Description**: This endpoint loads the CSV data and displays it as a table in an HTML template. It’s useful for inspecting the raw data used for optimization.
    - **Template**: `data_source.html`
+   ![Project Logo](images/screenshot_3.png)
 
 
 3. **Route Data View**
    - **URL**: `/route-data-view/`
    - **Description**: This route provides a view of detailed route data. It may include detailed information such as pickup and dropoff times, locations, distances, travel times, and more.
    - **Response**: A detailed view of the route data.
+   ![Project Logo](images/screenshot_2.png)
   
 
 ## Route Optimization Overview

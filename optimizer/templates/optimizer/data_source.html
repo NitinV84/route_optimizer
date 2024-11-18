@@ -1,4 +1,95 @@
 <!DOCTYPE html>
 <html lang="en">
-    This HTML template renders a data table that displays the content of a CSV file in a clean, readable format.
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Route Data</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.0/css/bootstrap.min.css">
+    <style>
+        body {
+            background-color: #f3f4f6; /* Light gray background for a clean look */
+        }
+        .container {
+            background: #ffffff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.15); /* Subtle shadow for focus */
+        }
+        h2 {
+            color: #0d6efd; /* Bootstrap primary blue for headings */
+            text-align: center;
+            margin-bottom: 25px;
+            font-weight: bold;
+        }
+        table {
+            font-size: 14px; /* Compact font size */
+        }
+        th {
+            background-color: #0d6efd; /* Primary blue header */
+            color: #ffffff; /* White text for contrast */
+            text-align: center;
+            vertical-align: middle;
+        }
+        td {
+            vertical-align: middle;
+        }
+        .table thead th {
+            border-bottom: 3px solid #dee2e6;
+        }
+        .table tbody tr:nth-child(even) {
+            background-color: #e9ecef; /* Light gray for alternate rows */
+        }
+        .table tbody tr:hover {
+            background-color: #d1e7dd; /* Light green highlight on hover */
+        }
+        .pickup-column {
+            color: #198754; /* Green for pickup columns */
+            font-weight: bold;
+        }
+        .dropoff-column {
+            color: #dc3545; /* Red for dropoff columns */
+            font-weight: bold;
+        }
+        .time-column {
+            color: #6c757d; /* Neutral gray for time columns */
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2>Route Data</h2>
+        <table class="table table-bordered table-striped table-hover">
+            <thead>
+                <tr>
+                    <th>Pickup Company</th>
+                    <th>Pickup Address</th>
+                    <th>Pickup Postcode</th>
+                    <th>Pickup Time From</th>
+                    <th>Pickup Time To</th>
+                    <th>Dropoff Company</th>
+                    <th>Dropoff Address</th>
+                    <th>Dropoff Postcode</th>
+                    <th>Dropoff Time From</th>
+                    <th>Dropoff Time To</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for row in data %}
+                <tr>
+                    <td class="pickup-column">{{ row.pickup_company_name }}</td>
+                    <td class="pickup-column">{{ row.pickup_address_line_1 }}</td>
+                    <td class="pickup-column">{{ row.pickup_postcode }}</td>
+                    <td class="time-column">{{ row.pickup_time_from }}</td>
+                    <td class="time-column">{{ row.pickup_time_to }}</td>
+                    <td class="dropoff-column">{{ row.dropoff_company_name }}</td>
+                    <td class="dropoff-column">{{ row.dropoff_address_line_1 }}</td>
+                    <td class="dropoff-column">{{ row.dropoff_postcode }}</td>
+                    <td class="time-column">{{ row.dropoff_time_from }}</td>
+                    <td class="time-column">{{ row.dropoff_time_to }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
 </html>

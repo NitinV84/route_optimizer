@@ -37,6 +37,7 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'optimizer',
 ]
 
 MIDDLEWARE = [
@@ -121,3 +122,8 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+
+CSV_FILE_NAME='customer-requests-testingLondon36.csv'
+OUTPUT_ROUTES_CSV_FILE_NAME='optimized_routes.csv'
+GOOGLE_MAP_LINK='https://www.google.com/maps/dir/'

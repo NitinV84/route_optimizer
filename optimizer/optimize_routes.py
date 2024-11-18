@@ -1,13 +1,56 @@
-# Calculate Distances: Use the Haversine formula to calculate the distance between two geographic points (latitude and longitude). This will help in finding the nearest stop for each leg of the route.
+import csv
+import os
+import time
+from math import radians, sin, cos, sqrt, atan2
+from datetime import timedelta
+import pandas as pd
+from django.conf import settings
 
-# Estimate Travel Time: Calculate travel time dynamically based on distance, using a lower speed for short distances and a higher speed for longer distances. This ensures more accurate travel time estimates.
 
-# Generate Google Maps Links: Create a Google Maps link that plots the optimized route on a map. Ensure that each stop in the route is unique to avoid duplicate waypoints.
+def optimize_routes(locations, distance_limit=120, time_limit=480):
+    """
+    Optimizes a set of delivery or travel routes based on distance and time constraints.
 
-# Optimize Route: Implement a point-to-point optimization by choosing the nearest unvisited location at each step. Organize pickups and drop-offs so that each route segment has a maximum number of stops, making the routes efficient and manageable.
+    Args:
+        locations (list): A list of dictionaries, each representing a location with its 
+                           distance and travel time details.
+        distance_limit (float): The maximum allowable distance (in kilometers) for the route.
+        time_limit (int): The maximum allowable time (in minutes) for the route (default is 8 hours).
 
-# Load and Process Data: Load the data from a CSV file, preprocess it by setting default values where necessary, and convert it into a format suitable for optimization.
+    Returns:
+        list: A list of dictionaries containing optimized route map links.
+    """
+    
+    # Initialize variables for route optimization
+    optimized_routes = []  # List to store the optimized routes
+    current_time = 0  # Start with 0 minutes for total time
+    total_distance = 0  # Start with 0 km for total distance
+    route = []  # List to hold the route locations
 
-# Save and Export Results: Export each optimized route segment to a CSV file, including total distance, total duration, and a link to the Google Maps route. Return all Google Maps links for easy access.
+    # Iterate through the locations and build the optimized route
+    for location in locations:
+        # Check if adding this location exceeds the distance limit
+        if total_distance + location['distance'] > distance_limit:
+            break  # Stop if the route exceeds the distance limit
+        
+        # Check if adding this location exceeds the time limit
+        if current_time + location['travel_time'] > time_limit:
+            break  # Stop if the route exceeds the time limit
+        
+        # Add the location to the route
+        route.append(location)
+        total_distance += location['distance']  # Add the location's distance to total distance
+        current_time += location['travel_time']  # Add the location's travel time to total time
 
-# Run the Program: Execute the main function to load data, optimize the routes, and generate CSV files and map links for each route.
+    # Generate Google Maps links for each location in the optimized route
+    for loc in route:
+        # Format the map link for the route from pickup to dropoff location
+        route_map_link = f"{settings.GOOGLE_MAP_LINK}{loc['pickup_lat']},{loc['pickup_lng']}/{loc['dropoff_lat']},{loc['dropoff_lng']}"
+        
+        # Add the map link to the list of optimized routes
+        optimized_routes.append({
+            'map_link': route_map_link  # Store the map link for this location
+        })
+
+    # Return the list of optimized route map links
+    return optimized_routes
